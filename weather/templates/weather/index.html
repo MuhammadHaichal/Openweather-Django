@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{ context.title }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include 'snippets/styles.html' %}
+</head>
+
+<body>
+  <!-- navbar start -->
+  {% include 'snippets/navbar/navbar.html' %}
+  <!-- navbar end -->
+
+  <!-- feature searching -->
+  <section class="container">
+    <h2 class="card-body display-5 text-capitalize mt-5">
+      openweather
+    </h2>
+    <p class="card-title">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur
+      cupidatat.</p>
+    <div class="mt-5">
+      <form class="form" method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-sm-6 mt-3">
+            <input class="form-control" placeholder="Searching Kota" type="text" name="city">
+          </div>
+          <div class="col-sm-6 mt-3">
+            <button class="btn btn-primary text-capitalize" type="submit">Cari</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <!-- feature searching end -->
+
+   
+  <!-- result dari searching -->
+  <div class="container mt-5">
+    <!-- jika data tidak ditemukan -->
+    {% if context.data.cod == '404' %}
+    {% include 'weather/dataNotFound.html' %}
+    <div class="container card card-body">
+      <h2 class="fw-700 text-capitalize ">{{ context.data.message }}</h2>
+    </div>
+
+    <!-- jika data ditemukan -->
+    {% elif context.data.cod == 200 %}
+    {% include 'weather/dataFound.html' %}
+    {% endif %}
+  </div>
+  <!-- result end -->
+
+
+
+   
+
+
+
+
+
+
+
+  <!-- <p>{{ context.data}}</p> -->
+  {% include 'snippets/script.html' %}
+</body>
+
+</html>
