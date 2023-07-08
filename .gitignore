@@ -1,2 +1,9 @@
+# enviroment 
 .env
+
+# db
 db.sqlite3
+
+# cache python 
+*.pyc
+__pycache__
